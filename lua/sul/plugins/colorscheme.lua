@@ -1,1 +1,1 @@
-return { "rose-pine/neovim", name = "rose-pine" }
+return { "ayu-theme/ayu-vim", 'cocopon/iceberg.vim', 'sainnhe/gruvbox-material' }

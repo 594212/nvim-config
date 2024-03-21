@@ -1,5 +1,5 @@
-function colorsheme() 
-	vim.cmd.colorscheme("rose-pine")
+function colorsheme()
+	vim.cmd.colorscheme("gruvbox-material")
 end
 
 colorsheme()
