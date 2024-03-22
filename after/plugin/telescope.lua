@@ -4,11 +4,23 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>/', builtin.git_files, {})
 vim.keymap.set('n', '<leader>e', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>fp', '<cmd>lua search_php_files()<CR>');
+vim.keymap.set('n', '<C-l>', builtin.lsp_document_symbols);
 
-function search_php_files()
-	require('telescope.builtin').find_files({
-		prompt_title = "< Php Files >",
-		find_command = { 'rg', '--files', '--type', 'php' }
-	})
+vim.keymap.set('n', '<leader>df',
+    function()
+        builtin.lsp_document_symbols {
+            symbols = "function"
+        }
+    end
+);
+
+
+---@param lang string
+local function find_language_file(lang)
+    require('telescope.builtin').find_files({
+        prompt_title = "< " .. string.upper(lang) .. " Files >",
+        find_command = { 'rg', '--files', '--type', lang }
+    })
 end
+
+vim.keymap.set('n', '<leader>lp', function() find_language_file('php') end);
