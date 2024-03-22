@@ -17,3 +17,4 @@ function bufinfo()
 end
 
 -- vim.fn.getbufvar("%", "terminal_job_pid") to check if it buffer
+-- new comment
