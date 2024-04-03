@@ -1,22 +1,10 @@
+vim.api.nvim_command("autocmd TermOpen * startinsert")       -- starts in insert mode
+vim.api.nvim_command("autocmd TermOpen * setlocal nonumber") -- no numbers
+vim.api.nvim_command("autocmd TermEnter * setlocal signcolumn=no")
+
 vim.keymap.set("t", "<C-z>", function()
     vim.cmd.buffer('#')
 end);
-
-local function hideAll()
-    vim.o.showmode = false
-    vim.o.ruler = false
-    vim.o.laststatus = 0
-    vim.o.showcmd = false
-    vim.opt.number = false
-    vim.opt.relativenumber = false
-end
-
-local function showAll()
-    vim.o.showmode = true
-    vim.o.ruler = true
-    vim.o.laststatus = 2
-    vim.o.showcmd = true
-end
 
 local function jump2term()
     if vim.fn.bufname("term://") == "" then
@@ -30,10 +18,8 @@ end
 
 local function buf2term()
     if '' ~= vim.fn.getbufvar("%", "terminal_job_pid") then
-        showAll()
-        return vim.cmd.buffer('#')
+        vim.cmd.buffer('#')
     else
-        hideAll()
         jump2term()
     end
 end
