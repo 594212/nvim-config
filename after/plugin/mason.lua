@@ -7,18 +7,42 @@ require("mason-lspconfig").setup {
         "jsonls",
     }
 }
-require("lsp-format").setup()
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    callback = function(args)
+        require("conform").format({ bufnr = args.buf })
+    end,
+})
+
+require("conform").setup({
+    format_on_save = {
+        -- These options will be passed to conform.format()
+        timeout_ms = 500,
+        lsp_fallback = true,
+    },
+    formatters_by_ft = {
+        lua = { "lua_ls" },
+        tex = { "latexindent" },
+        yaml = { "yamlls" }
+    },
+})
+require("conform").formatters.latexindent = {
+    prepend_args = { "-l", "-m" },
+    command = require("conform.util").find_executable({
+        "/usr/bin/latexindent",
+    }, "latexindent"),
+}
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require("mason-lspconfig").setup_handlers {
     function(server_name)
-        require("lspconfig")[server_name].setup { on_attach = require("lsp-format").on_attach, capabilities = capabilities }
+        require("lspconfig")[server_name].setup { capabilities = capabilities }
     end,
     ["lua_ls"] = function()
         local lspconfig = require("lspconfig")
         lspconfig.lua_ls.setup {
-            on_attach = require("lsp-format").on_attach,
             capabilities = capabilities,
             settings = {
                 Lua = {
@@ -34,7 +58,6 @@ require("mason-lspconfig").setup_handlers {
             },
         }
     end,
-
 }
 
 vim.api.nvim_create_autocmd('LspAttach', {
