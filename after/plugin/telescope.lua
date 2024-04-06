@@ -6,6 +6,7 @@ vim.keymap.set('n', '<leader>e', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<C-l>', builtin.lsp_document_symbols);
 vim.keymap.set('n', 'gr', builtin.lsp_references);
+vim.keymap.set('n', '<leader>ds', builtin.lsp_document_symbols);
 
 vim.keymap.set('n', '<leader>df',
     function()
