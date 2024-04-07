@@ -11,4 +11,5 @@ vim.api.nvim_set_option('langmap',
 -- \(foo\)\@<!bar ----------- foobar bar
 -- \\left[\\{\\[(]\ze\(\(\s*\n\)\@!\)
 -- \(\n\s*\)\@<!\\left[\\{\\[(]
+vim.opt.conceallevel = 2
 vim.api.nvim_set_hl(0, 'Conceal', { ctermbg = nil, ctermfg = 5 })

@@ -24,7 +24,6 @@ require("conform").setup({
     formatters_by_ft = {
         lua = { "lua_ls" },
         tex = { "latexindent" },
-        yaml = { "yamlls" }
     },
 })
 require("conform").formatters.latexindent = {
