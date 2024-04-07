@@ -9,7 +9,6 @@ require("mason-lspconfig").setup {
 }
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
     callback = function(args)
         require("conform").format({ bufnr = args.buf })
     end,
@@ -24,6 +23,8 @@ require("conform").setup({
     formatters_by_ft = {
         lua = { "lua_ls" },
         tex = { "latexindent" },
+        yaml = { "yamlls" },
+        php = { "pint" }
     },
 })
 require("conform").formatters.latexindent = {
@@ -32,6 +33,7 @@ require("conform").formatters.latexindent = {
         "/usr/bin/latexindent",
     }, "latexindent"),
 }
+-- require("lspconfig").harper_ls.setup {}
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 

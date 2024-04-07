@@ -11,7 +11,7 @@ vim.keymap.set('n', '<leader>ds', builtin.lsp_document_symbols);
 vim.keymap.set('n', '<leader>df',
     function()
         builtin.lsp_document_symbols {
-            symbols = "function"
+            symbols = { "function", "method" }
         }
     end
 );
