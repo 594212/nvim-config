@@ -1,9 +1,8 @@
 return {
-	'lewis6991/gitsigns.nvim',
-	'ThePrimeagen/harpoon',
-	'windwp/nvim-autopairs',
-	{
-		'numToStr/Comment.nvim',
-		lazy = false,
-	}
+    'lewis6991/gitsigns.nvim',
+    'ThePrimeagen/harpoon',
+    {
+        'numToStr/Comment.nvim',
+        lazy = false,
+    }
 }
