@@ -5,6 +5,8 @@ require("mason-lspconfig").setup {
         "rust_analyzer",
         "clangd",
         "jsonls",
+        "yamlls",
+        "gopls",
     }
 }
 
@@ -21,10 +23,8 @@ require("conform").setup({
         lsp_fallback = true,
     },
     formatters_by_ft = {
-        lua = { "lua_ls" },
         tex = { "latexindent" },
-        yaml = { "yamlls" },
-        php = { "pint" }
+        php = { "pint" },
     },
 })
 require("conform").formatters.latexindent = {
@@ -36,6 +36,7 @@ require("conform").formatters.latexindent = {
 -- require("lspconfig").harper_ls.setup {}
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 require("mason-lspconfig").setup_handlers {
     function(server_name)
@@ -58,6 +59,15 @@ require("mason-lspconfig").setup_handlers {
                 },
             },
         }
+    end,
+    ["gopls"] = function()
+        require('lspconfig').gopls.setup({
+            settings = {
+                gopls = {
+                    gofumpt = true
+                }
+            }
+        })
     end,
 }
 
@@ -86,5 +96,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<space>f', function()
             vim.lsp.buf.format { async = true }
         end, opts)
+        vim.keymap.set('n', "<leader>cl", "<cmd>lua vim.lsp.codelens.run()<cr>", opts)
+        vim.keymap.set('n', "<leader>cq", "<cmd>lua vim.diagnostic.setloclist()<cr>", opts)
     end,
 });
