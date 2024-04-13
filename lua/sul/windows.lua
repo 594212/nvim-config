@@ -8,9 +8,7 @@ end);
 
 local function jump2term()
     if vim.fn.bufname("term://") == "" then
-        return vim.cmd.terminal(
-        -- 'powershell.exe -NoExit -Command "&{Import-Module """C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\Microsoft.VisualStudio.DevShell.dll"""; Enter-VsDevShell d6caeb67 -SkipAutomaticLocation -DevCmdArguments """-arch=x64 -host_arch=x64"""}"'
-        )
+        return vim.cmd.terminal()
     else
         vim.cmd.buffer("term://")
     end
@@ -24,5 +22,5 @@ local function buf2term()
     end
 end
 
-vim.keymap.set("n", "<C-z>", buf2term);
-vim.keymap.set("i", "<C-z>", jump2term);
+-- vim.keymap.set("n", "<C-z>", buf2term);
+-- vim.keymap.set("i", "<C-z>", jump2term);
